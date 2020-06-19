@@ -88,6 +88,35 @@ app.use((req, res, next) => {
 app.use('/api', apiControllers);
 
 
+// ////////////////////////
+// //       graphql      //
+// ////////////////////////
+
+// const { postgraphile } = require("postgraphile");
+// const DATABASE_URL = process.env.DATABASE_URL;
+
+// app.use(
+//     postgraphile(DATABASE_URL, "public", {
+//         ignoreRBAC: true, // Role Based Access Control (RBAC)
+//         extendedErrors: ["errcode", "detail", "hint"],
+//         graphiql: true
+//     })
+// );
+
+// ////////////////////////
+// //    start server    //
+// ////////////////////////
+
+// (async () => {
+//     try {
+//         app.listen(process.env.PORT || 2000, function () {
+//             console.log(`Your postgraphole API endpoint is: http://localhost:${PORT}/graphiql`);
+//         });
+//     } catch (err) {
+//         console.error(err);
+//     }
+// })();
+
 ////////////////////////
 //    start server    //
 ////////////////////////

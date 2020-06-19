@@ -20,8 +20,8 @@ const initStatesTable = async () => {
     const statesDataFile = process.env.CSV_STATES;
     await postgres.query(
         `CREATE TABLE IF NOT EXISTS states(
-          state_id SERIAL PRIMARY KEY,
-          name TEXT NOT NULL
+            state_id SERIAL PRIMARY KEY,
+            name TEXT NOT NULL
         );`
     );
 
@@ -45,9 +45,9 @@ const initCitiesTable = async () => {
     const citiesDataFile = process.env.CSV_CITIES;
     await postgres.query(
         `CREATE TABLE IF NOT EXISTS cities(
-          city_id SERIAL PRIMARY KEY,
-          name TEXT NOT NULL,
-          state_id INTEGER REFERENCES states(state_id)
+            city_id SERIAL PRIMARY KEY,
+            name TEXT NOT NULL,
+            state_id INTEGER REFERENCES states(state_id)
         );`
     );
 
@@ -71,8 +71,8 @@ const initRolesTable = async () => {
     const rolesDataFile = process.env.CSV_ROLES;
     await postgres.query(
         `CREATE TABLE IF NOT EXISTS roles(
-          role_id SERIAL PRIMARY KEY,
-          name TEXT NOT NULL
+            role_id SERIAL PRIMARY KEY,
+            name TEXT NOT NULL
         );`
     );
 
@@ -172,15 +172,15 @@ const initFirmsTable = async () => {
 const initEmployeesTable = async () => {
     await postgres.query(
         `CREATE TABLE IF NOT EXISTS employees(
-          emp_id SERIAL PRIMARY KEY,
-          name TEXT NOT NULL,
-          phone NUMERIC(10) UNIQUE NOT NULL,
-          firm_id INTEGER REFERENCES firms(firm_id),
-          hod INTEGER REFERENCES employees(emp_id) DEFAULT 1,
-          role_id INTEGER REFERENCES roles(role_id),
-          img_url TEXT,
-          is_active BOOLEAN DEFAULT TRUE,
-          time_stamp TIMESTAMPTZ DEFAULT now() NOT NULL
+            emp_id SERIAL PRIMARY KEY,
+            name TEXT NOT NULL,
+            phone NUMERIC(10) UNIQUE NOT NULL,
+            firm_id INTEGER REFERENCES firms(firm_id),
+            hod INTEGER REFERENCES employees(emp_id) DEFAULT 1,
+            role_id INTEGER REFERENCES roles(role_id),
+            img_url TEXT,
+            is_active BOOLEAN DEFAULT TRUE,
+            time_stamp TIMESTAMPTZ DEFAULT now() NOT NULL
         );`
     );
 };
@@ -193,23 +193,63 @@ const initEmployeesTable = async () => {
 const initClientsTable = async () => {
     await postgres.query(
         `CREATE TABLE IF NOT EXISTS clients(
-          client_id SERIAL PRIMARY KEY,
-          name TEXT NOT NULL,
-          phone NUMERIC(10) UNIQUE NOT NULL,
-          email TEXT UNIQUE NOT NULL,
-          service_id INTEGER REFERENCES service_types(service_id),
-          pan_no TEXT UNIQUE NOT NULL,
-          pan_doc TEXT,
-          gstin TEXT UNIQUE,
-          contact_persons TEXT[][],
-          address TEXT,
-          city_id INTEGER REFERENCES cities(city_id),
-          is_active BOOLEAN DEFAULT TRUE,
-          time_stamp TIMESTAMPTZ DEFAULT now() NOT NULL
+            client_id SERIAL PRIMARY KEY,
+            firm_id INTEGER REFERENCES firms(firm_id),
+            name TEXT NOT NULL,
+            phone NUMERIC(10) UNIQUE NOT NULL,
+            email TEXT UNIQUE NOT NULL,
+            service_id INTEGER REFERENCES service_types(service_id),
+            pan_no TEXT UNIQUE NOT NULL,
+            pan_doc TEXT,
+            gstin TEXT UNIQUE,
+            contact_persons TEXT[],
+            address TEXT,
+            city_id INTEGER REFERENCES cities(city_id),
+            is_active BOOLEAN DEFAULT TRUE,
+            time_stamp TIMESTAMPTZ DEFAULT now() NOT NULL
         );`
     );
 };
 
+
+////////////////////////
+//      billing       //
+////////////////////////
+
+const initBillingTable = async () => {
+    await postgres.query(
+        `CREATE TABLE IF NOT EXISTS billing(
+            bill_id SERIAL PRIMARY KEY,
+            expected_amount NUMERIC(15, 2) NOT NULL,
+            recieved_amount NUMERIC(15, 2) NOT NULL,
+            discount NUMERIC(15, 2) NOT NULL,
+            expected_payment_date TIMESTAMPTZ,
+            settled_payment_date TIMESTAMPTZ,
+            is_settled BOOLEAN DEFAULT FALSE,
+            time_stamp TIMESTAMPTZ DEFAULT now() NOT NULL
+        );`
+    );
+};
+
+
+////////////////////////
+//      tasktray      //
+////////////////////////
+
+const initTasktrayTable = async () => {
+    await postgres.query(
+        `CREATE TABLE IF NOT EXISTS tasktray(
+            task_id SERIAL PRIMARY KEY,
+            bill_id INTEGER REFERENCES billing(bill_id),
+            client_id INTEGER REFERENCES clients(client_id),
+            service_id INTEGER REFERENCES service_types(service_id),
+            main_worker INTEGER REFERENCES employees(emp_id),
+            all_workers INTEGER[] NOT NULL,
+            is_complete BOOLEAN DEFAULT FALSE,
+            time_stamp TIMESTAMPTZ DEFAULT now() NOT NULL 
+        );`
+    );
+};
 
 /////////////////////////
 //     init tables     //
@@ -228,6 +268,8 @@ const initDatabaseTables = async () => {
         await initFirmsTable();
         await initEmployeesTable();
         await initClientsTable();
+        await initBillingTable();
+        await initTasktrayTable();
 
         return console.log(`Updated DataBase with all necessary tables !!`);
     } catch (err) {

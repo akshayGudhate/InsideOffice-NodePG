@@ -2,51 +2,56 @@ require('dotenv').config();
 const express = require('express');
 
 const MulterUpload = require('../multerUploads');
-const EmployeeModel = require('../../models/firm/employeeModel');
+const ClientModel = require('../../models/firm/clientModel');
 
 /** image deletion packages, for duplicate image */
 const fs = require("fs");
 const { promisify } = require("util");
-const deleteImageFile = promisify(fs.unlink);
+const deleteDocFile = promisify(fs.unlink);
 /** image deletion packages, for duplicate image */
 
 const router = express.Router();
 
 
 /////////////////////////
-//   create employee   //
+//    create client    //
 /////////////////////////
 
-router.post('/createEmployee', MulterUpload.single('img_url'), async (req, res) => {
+router.post('/createClient', MulterUpload.single('pan_doc'), async (req, res) => {
     try {
-        const { name, phone, firm_id, hod, role_id } = await req.body;
-        const img_url = (await req.file) ? await req.file.filename : `defaultImage.png`;
+        const { name, firm_id, phone, email, service_id, pan_no, gstin, address, city_id } = req.body;
+        const contact_persons = JSON.parse(req.body.contact_persons);
+        const pan_doc = (await req.file) ? await req.file.filename : ``;
 
-        const isEmployeeExist = (await EmployeeModel.searchEmployeeByPhone(phone)).rows;
+        const isEmployeeExist = (await ClientModel.searchClientByPhone(phone)).rows;
 
         if (isEmployeeExist.length > 0) {
             if (req.file) {
-                await deleteImageFile(req.file.path);
+                await deleteDocFile(req.file.path);
             }
             return res.status(500).json({
                 success: false,
-                info: `oops, employee already exist !`,
+                info: `oops, client already exist !`,
                 data: isEmployeeExist[0].emp_id
             });
-        } else {
-            const emp_id = (await EmployeeModel.createEmployee(name, phone, firm_id, hod, role_id, img_url)).rows[0].emp_id;
 
-            if (emp_id > 0) {
+        } else {
+
+            const client_id = (await ClientModel.createClient(
+                name, firm_id, phone, email, service_id, pan_no, pan_doc, gstin, contact_persons, address, city_id
+            )).rows[0].client_id;
+
+            if (client_id > 0) {
                 return res.status(200).json({
                     success: true,
-                    info: `created new employee !`,
-                    data: emp_id
+                    info: `created new client !`,
+                    data: client_id
                 });
             } else {
                 return res.status(500).json({
                     success: false,
-                    info: `oops, employee not created !`,
-                    data: emp_id
+                    info: `oops, client not created !`,
+                    data: client_id
                 });
             }
         }
@@ -58,7 +63,7 @@ router.post('/createEmployee', MulterUpload.single('img_url'), async (req, res) 
             data: []
         });
     }
-});
+})
 
 /////////////////////////
 //     state list      //

@@ -1,0 +1,485 @@
+{
+	"info": {
+		"_postman_id": "d272b11d-f44a-43fa-9b07-9c6d9a375599",
+		"name": "InsideOffice",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "StaticData API",
+			"item": [
+				{
+					"name": "State List",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "http://localhost:8008/api/stateList",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8008",
+							"path": [
+								"api",
+								"stateList"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "City List",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "http://localhost:8008/api/cityList",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8008",
+							"path": [
+								"api",
+								"cityList"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cities of State List",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "state_id",
+									"value": "15",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8008/api/citiesOfState",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8008",
+							"path": [
+								"api",
+								"citiesOfState"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Role List",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "http://localhost:8008/api/roleList",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8008",
+							"path": [
+								"api",
+								"roleList"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Service Frequency List",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "http://localhost:8008/api/servFrqList",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8008",
+							"path": [
+								"api",
+								"servFrqList"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Service Type List",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "http://localhost:8008/api/servTypeList",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8008",
+							"path": [
+								"api",
+								"servTypeList"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Firm API",
+			"item": [
+				{
+					"name": "Create Firm",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "SS Gudhate & CO.",
+									"type": "text"
+								},
+								{
+									"key": "owner",
+									"value": "Sarang Gudhate",
+									"type": "text"
+								},
+								{
+									"key": "phone",
+									"value": "9890787997",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "sgudhate@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "city_id",
+									"value": "373",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8008/api/createFirm",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8008",
+							"path": [
+								"api",
+								"createFirm"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Client",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "COEP",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "sgudhate@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "city_id",
+									"value": "373",
+									"type": "text"
+								},
+								{
+									"key": "service_id",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "phone",
+									"value": "9890787997",
+									"type": "text"
+								},
+								{
+									"key": "pan_no",
+									"value": "BKQPG6477A",
+									"type": "text"
+								},
+								{
+									"key": "address",
+									"value": "Katraj",
+									"type": "text"
+								},
+								{
+									"key": "contact_persons",
+									"value": "[\"Akshay : 956214185\", \"Mama : 6601666666\"]",
+									"type": "text"
+								},
+								{
+									"key": "gstin",
+									"value": "ALKjdhs2222",
+									"type": "text"
+								},
+								{
+									"key": "pan_doc",
+									"type": "file",
+									"src": "/home/akshayg/Pictures/6.png"
+								},
+								{
+									"key": "firm_id",
+									"value": "2",
+									"type": "text"
+								}
+							],
+							"options": {
+								"formdata": {}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8008/api/createClient",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8008",
+							"path": [
+								"api",
+								"createClient"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Employee",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Sarang Gudhate",
+									"type": "text"
+								},
+								{
+									"key": "phone",
+									"value": "9561214185",
+									"type": "text"
+								},
+								{
+									"key": "firm_id",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "hod",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "role_id",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "img_url",
+									"type": "file",
+									"src": "/home/akshayg/Pictures/2.png"
+								}
+							],
+							"options": {
+								"formdata": {}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8008/api/createEmployee",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8008",
+							"path": [
+								"api",
+								"createEmployee"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Tasks API",
+			"item": [
+				{
+					"name": "Create Bill",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "expected_amount",
+									"value": "120000",
+									"type": "text"
+								},
+								{
+									"key": "recieved_amount",
+									"value": "88000",
+									"type": "text"
+								},
+								{
+									"key": "discount",
+									"value": "2000",
+									"type": "text"
+								},
+								{
+									"key": "expected_payment_date",
+									"value": "2020-08-01",
+									"type": "text"
+								}
+							],
+							"options": {
+								"urlencoded": {}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8008/api/createBill",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8008",
+							"path": [
+								"api",
+								"createBill"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Task",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "bill_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "service_id",
+									"value": "8",
+									"type": "text"
+								},
+								{
+									"key": "main_worker",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "all_workers",
+									"value": "[\"1\", \"2\"]",
+									"type": "text"
+								}
+							],
+							"options": {
+								"urlencoded": {}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8008/api/createTask",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8008",
+							"path": [
+								"api",
+								"createTask"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

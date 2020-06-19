@@ -156,12 +156,12 @@ const initFirmsTable = async () => {
         );`
     );
 
-    /** insert my details as a default first row */
-    return postgres.query(
-        `INSERT INTO firms(name, owner, phone, email, city_id)
-         VALUES ('InsideAnything', 'Akshay Gudhate', 9561214185, 'akshay.gudhate@yahoo.com', 373)
-         ON CONFLICT DO NOTHING;`
-    );
+    // /** insert my details as a default first row */
+    // return postgres.query(
+    //     `INSERT INTO firms(name, owner, phone, email, city_id)
+    //      VALUES ('InsideAnything', 'Akshay Gudhate', 9561214185, 'akshay.gudhate@yahoo.com', 373)
+    //      ON CONFLICT DO NOTHING;`
+    // );
 };
 
 
@@ -178,6 +178,8 @@ const initEmployeesTable = async () => {
             firm_id INTEGER REFERENCES firms(firm_id),
             hod INTEGER REFERENCES employees(emp_id) DEFAULT 1,
             role_id INTEGER REFERENCES roles(role_id),
+            salary NUMERIC(15, 2) NOT NULL,
+            inct_factor NUMERIC(2) NOT NULL,
             img_url TEXT,
             is_active BOOLEAN DEFAULT TRUE,
             time_stamp TIMESTAMPTZ DEFAULT now() NOT NULL
@@ -201,6 +203,8 @@ const initClientsTable = async () => {
             service_id INTEGER REFERENCES service_types(service_id),
             pan_no TEXT UNIQUE NOT NULL,
             pan_doc TEXT,
+            aadhar_no TEXT UNIQUE NOT NULL,
+            aadhar_doc TEXT,
             gstin TEXT UNIQUE,
             contact_persons TEXT[],
             address TEXT,
@@ -220,9 +224,11 @@ const initBillingTable = async () => {
     await postgres.query(
         `CREATE TABLE IF NOT EXISTS billing(
             bill_id SERIAL PRIMARY KEY,
-            expected_amount NUMERIC(15, 2) NOT NULL,
-            recieved_amount NUMERIC(15, 2) NOT NULL,
-            discount NUMERIC(15, 2) NOT NULL,
+            basic NUMERIC(15, 2) NOT NULL,
+            gst NUMERIC(15, 2) NOT NULL,
+            total NUMERIC(15, 2) NOT NULL,
+            recieved NUMERIC(15, 2) NOT NULL DEFAULT 0,
+            discount NUMERIC(15, 2) NOT NULL DEFAULT 0,
             expected_payment_date TIMESTAMPTZ,
             settled_payment_date TIMESTAMPTZ,
             is_settled BOOLEAN DEFAULT FALSE,
@@ -250,6 +256,27 @@ const initTasktrayTable = async () => {
         );`
     );
 };
+
+////////////////////////
+//       salary       //
+////////////////////////
+
+const initSalaryTable = async () => {
+    await postgres.query(
+        `CREATE TABLE IF NOT EXISTS salary(
+            salary_id SERIAL PRIMARY KEY,
+            emp_id INTEGER REFERENCES employees(emp_id),
+            basic NUMERIC(15, 2) NOT NULL,
+            incentives NUMERIC(15, 2) NOT NULL,
+            total NUMERIC(15, 2) NOT NULL,
+            month_year TIMESTAMPTZ,
+            is_settled BOOLEAN DEFAULT FALSE,
+            time_stamp TIMESTAMPTZ DEFAULT now() NOT NULL
+        );`
+    );
+};
+
+
 
 /////////////////////////
 //     init tables     //

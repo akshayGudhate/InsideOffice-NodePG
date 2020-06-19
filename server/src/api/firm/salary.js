@@ -1,33 +1,33 @@
 require('dotenv').config();
 const express = require('express');
 
-const BillingModel = require('../../models/tasks/billingModel');
+const SalaryModel = require('../../models/firm/firmModel');
+
 
 const router = express.Router();
 
 
 /////////////////////////
-//     create bill     //
+//     create firm     //
 /////////////////////////
 
-router.post('/createBill', async (req, res) => {
+router.post('/createFirm', async (req, res) => {
     try {
-        const { basic, gst, expected_payment_date } = req.body;
-        const total = (parseFloat(basic) + parseFloat(gst));
+        const { name, owner, phone, email, city_id } = req.body;
 
-        const bill_id = (await BillingModel.createBill(basic, gst, total, expected_payment_date)).rows[0].bill_id;
+        const firm_id = (await FirmModel.createFirm(name, owner, phone, email, city_id)).rows[0].firm_id;
 
-        if (bill_id > 0) {
+        if (firm_id > 0) {
             return res.status(200).json({
                 success: true,
-                info: `created new bill !`,
-                data: bill_id
+                info: `created new firm !`,
+                data: firm_id
             });
         } else {
             return res.status(500).json({
                 success: false,
-                info: `oops, bill not created !`,
-                data: bill_id
+                info: `oops, firm not created !`,
+                data: firm_id
             });
         }
 
@@ -38,7 +38,7 @@ router.post('/createBill', async (req, res) => {
             data: []
         });
     }
-})
+});
 
 /////////////////////////
 //     state list      //

@@ -17,18 +17,19 @@ const router = express.Router();
 //    create client    //
 /////////////////////////
 
-router.post('/createClient', MulterUpload.single('pan_doc'), async (req, res) => {
+router.post('/createClient', MulterUpload.any(), async (req, res) => {
     try {
-        const { name, firm_id, phone, email, service_id, pan_no, gstin, address, city_id } = req.body;
+        const { name, firm_id, phone, email, service_id, pan_no, aadhar_no, gstin, address, city_id } = req.body;
         const contact_persons = JSON.parse(req.body.contact_persons);
-        const pan_doc = (await req.file) ? await req.file.filename : ``;
 
         const isEmployeeExist = (await ClientModel.searchClientByPhone(phone)).rows;
 
         if (isEmployeeExist.length > 0) {
-            if (req.file) {
-                await deleteDocFile(req.file.path);
-            }
+            /** Delete files if existing employee docs */
+            Promise.all(req.files.map(item => {
+                return deleteDocFile(item.path);
+            }))
+
             return res.status(500).json({
                 success: false,
                 info: `oops, client already exist !`,
@@ -36,9 +37,22 @@ router.post('/createClient', MulterUpload.single('pan_doc'), async (req, res) =>
             });
 
         } else {
+            const dataFiles = Promise.all(req.files.map(async item => {
+                if (item.fieldname == 'aadhar_doc') {
+                    const aadhar_doc = item.filename;
+                    return { aadhar_doc };
+                }
+                if (item.fieldname == 'pan_doc') {
+                    const pan_doc = item.filename;
+                    return { pan_doc };
+                }
+            }));
+    
+            const docPaths = (await dataFiles);
 
             const client_id = (await ClientModel.createClient(
-                name, firm_id, phone, email, service_id, pan_no, pan_doc, gstin, contact_persons, address, city_id
+                name, firm_id, phone, email, service_id, pan_no, docPaths[0].pan_doc,
+                aadhar_no, docPaths[1].aadhar_doc, gstin, contact_persons, address, city_id
             )).rows[0].client_id;
 
             if (client_id > 0) {
@@ -63,7 +77,7 @@ router.post('/createClient', MulterUpload.single('pan_doc'), async (req, res) =>
             data: []
         });
     }
-})
+});
 
 /////////////////////////
 //     state list      //

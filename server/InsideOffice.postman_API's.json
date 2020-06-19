@@ -212,7 +212,10 @@
 									"value": "373",
 									"type": "text"
 								}
-							]
+							],
+							"options": {
+								"urlencoded": {}
+							}
 						},
 						"url": {
 							"raw": "http://localhost:8008/api/createFirm",
@@ -289,8 +292,18 @@
 								},
 								{
 									"key": "firm_id",
-									"value": "2",
+									"value": "1",
 									"type": "text"
+								},
+								{
+									"key": "aadhar_no",
+									"value": "223352541658",
+									"type": "text"
+								},
+								{
+									"key": "aadhar_doc",
+									"type": "file",
+									"src": "/home/akshayg/Pictures/2.png"
 								}
 							],
 							"options": {
@@ -322,17 +335,17 @@
 							"formdata": [
 								{
 									"key": "name",
-									"value": "Sarang Gudhate",
+									"value": "Akshay Gudhate",
 									"type": "text"
 								},
 								{
 									"key": "phone",
-									"value": "9561214185",
+									"value": "8208106722",
 									"type": "text"
 								},
 								{
 									"key": "firm_id",
-									"value": "2",
+									"value": "1",
 									"type": "text"
 								},
 								{
@@ -343,6 +356,16 @@
 								{
 									"key": "role_id",
 									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "salary",
+									"value": "120000",
+									"type": "text"
+								},
+								{
+									"key": "inct_factor",
+									"value": "7",
 									"type": "text"
 								},
 								{
@@ -385,18 +408,13 @@
 							"mode": "urlencoded",
 							"urlencoded": [
 								{
-									"key": "expected_amount",
+									"key": "basic",
 									"value": "120000",
 									"type": "text"
 								},
 								{
-									"key": "recieved_amount",
-									"value": "88000",
-									"type": "text"
-								},
-								{
-									"key": "discount",
-									"value": "2000",
+									"key": "gst",
+									"value": "860",
 									"type": "text"
 								},
 								{
@@ -454,7 +472,7 @@
 								},
 								{
 									"key": "all_workers",
-									"value": "[\"1\", \"2\"]",
+									"value": "[1,2]",
 									"type": "text"
 								}
 							],

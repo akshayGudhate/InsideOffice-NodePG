@@ -38,7 +38,7 @@ router.post('/createFirm', async (req, res) => {
             data: []
         });
     }
-})
+});
 
 /////////////////////////
 //     state list      //

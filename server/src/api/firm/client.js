@@ -19,8 +19,8 @@ const router = express.Router();
 
 router.post('/createClient', MulterUpload.any(), async (req, res) => {
     try {
-        const { name, firm_id, phone, email, service_id, pan_no, aadhar_no, gstin, address, city_id } = req.body;
-        const contact_persons = JSON.parse(req.body.contact_persons);
+        const { name, firm_id, phone, email, service_id, pan_no, aadhar_no, gstin, address, city_id } = await req.body;
+        const contact_persons = await JSON.parse(req.body.contact_persons);
 
         const isEmployeeExist = (await ClientModel.searchClientByPhone(phone)).rows;
 
@@ -47,7 +47,7 @@ router.post('/createClient', MulterUpload.any(), async (req, res) => {
                     return { pan_doc };
                 }
             }));
-    
+
             const docPaths = (await dataFiles);
 
             const client_id = (await ClientModel.createClient(
@@ -79,9 +79,40 @@ router.post('/createClient', MulterUpload.any(), async (req, res) => {
     }
 });
 
+
 /////////////////////////
-//     state list      //
+//  client searchlist  //
 /////////////////////////
+
+router.post('/searchClient', async (req, res) => {
+    try {
+        const { queryString } = await req.body;
+
+        const clientsList = (await ClientModel.searchClient(queryString)).rows;
+
+        if (clientsList.length > 0) {
+            return res.status(200).json({
+                success: true,
+                info: `results matching client !`,
+                data: clientsList
+            });
+        } else {
+            return res.status(500).json({
+                success: false,
+                info: `oops, client not found !`,
+                data: clientsList
+            });
+        }
+
+    } catch (err) {
+        return res.status(500).json({
+            success: false,
+            info: `error : ${err.message}`,
+            data: []
+        });
+    }
+});
+
 
 /////////////////////////
 //    frequncy list    //

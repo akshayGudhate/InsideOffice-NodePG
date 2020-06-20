@@ -12,8 +12,8 @@ const router = express.Router();
 
 router.post('/createTask', async (req, res) => {
     try {
-        const { bill_id, client_id, service_id, main_worker } = req.body;
-        const all_workers = JSON.parse(req.body.all_workers);
+        const { bill_id, client_id, service_id, main_worker } = await req.body;
+        const all_workers = await JSON.parse(req.body.all_workers);
 
         const task_id = (await TaskModel.createTask(bill_id, client_id, service_id, main_worker, all_workers)).rows[0].task_id;
 

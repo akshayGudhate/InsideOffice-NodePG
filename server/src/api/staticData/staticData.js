@@ -73,7 +73,7 @@ router.get('/cityList', async (req, res) => {
 
 router.post('/citiesOfState', async (req, res) => {
     try {
-        const { state_id } = req.body;
+        const { state_id } = await req.body;
         const citiesOfState = (await StaticDataModel.getCitiesOfState(state_id)).rows;
 
         if (citiesOfState.length > 0) {

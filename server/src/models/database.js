@@ -269,7 +269,8 @@ const initSalaryTable = async () => {
             basic NUMERIC(15, 2) NOT NULL,
             incentives NUMERIC(15, 2) NOT NULL,
             total NUMERIC(15, 2) NOT NULL,
-            month_year TIMESTAMPTZ,
+            month NUMERIC(2),
+            year NUMERIC(4),
             is_settled BOOLEAN DEFAULT FALSE,
             time_stamp TIMESTAMPTZ DEFAULT now() NOT NULL
         );`
@@ -297,6 +298,7 @@ const initDatabaseTables = async () => {
         await initClientsTable();
         await initBillingTable();
         await initTasktrayTable();
+        await initSalaryTable();
 
         return console.log(`Updated DataBase with all necessary tables !!`);
     } catch (err) {

@@ -24,6 +24,24 @@ class ClientModel {
         );
     }
 
+    /** search client function */
+    static searchClient(queryString) {
+        if (queryString == '' || queryString == null || queryString == undefined) {
+            return postgres.query(
+                `SELECT * FROM clients`
+            );
+        } else {
+            queryString = `%${queryString}%`;
+            return postgres.query(
+                `SELECT * FROM clients
+                 WHERE (LOWER(name) LIKE LOWER($1))
+                 OR (LOWER(email) LIKE LOWER($1))
+                 OR phone::text LIKE $1`,
+                [queryString]
+            );
+        }
+    }
+
 
 }
 

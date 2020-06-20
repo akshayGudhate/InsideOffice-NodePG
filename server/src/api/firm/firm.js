@@ -13,7 +13,7 @@ const router = express.Router();
 
 router.post('/createFirm', async (req, res) => {
     try {
-        const { name, owner, phone, email, city_id } = req.body;
+        const { name, owner, phone, email, city_id } = await req.body;
 
         const firm_id = (await FirmModel.createFirm(name, owner, phone, email, city_id)).rows[0].firm_id;
 

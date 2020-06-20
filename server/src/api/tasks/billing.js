@@ -12,7 +12,7 @@ const router = express.Router();
 
 router.post('/createBill', async (req, res) => {
     try {
-        const { basic, gst, expected_payment_date } = req.body;
+        const { basic, gst, expected_payment_date } = await req.body;
         const total = (parseFloat(basic) + parseFloat(gst));
 
         const bill_id = (await BillingModel.createBill(basic, gst, total, expected_payment_date)).rows[0].bill_id;

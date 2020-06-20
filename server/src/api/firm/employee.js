@@ -60,6 +60,41 @@ router.post('/createEmployee', MulterUpload.single('img_url'), async (req, res) 
     }
 });
 
+
+/////////////////////////
+//  employ searchlist  //
+/////////////////////////
+
+router.post('/searchEmployee', async (req, res) => {
+    try {
+        const { queryString } = await req.body;
+
+        const employeesList = (await EmployeeModel.searchEmployee(queryString)).rows;
+
+        if (employeesList.length > 0) {
+            return res.status(200).json({
+                success: true,
+                info: `results matching employee !`,
+                data: employeesList
+            });
+        } else {
+            return res.status(500).json({
+                success: false,
+                info: `oops, employee not found !`,
+                data: employeesList
+            });
+        }
+
+    } catch (err) {
+        return res.status(500).json({
+            success: false,
+            info: `error : ${err.message}`,
+            data: []
+        });
+    }
+});
+
+
 /////////////////////////
 //     state list      //
 /////////////////////////

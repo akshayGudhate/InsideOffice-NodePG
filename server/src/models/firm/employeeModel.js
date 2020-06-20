@@ -23,6 +23,31 @@ class EmployeeModel {
         );
     }
 
+    /** search employee with id function */
+    static searchEmployeeByID(emp_id) {
+        return postgres.query(
+            `SELECT * FROM employees WHERE emp_id=$1`,
+            [emp_id]
+        );
+    }
+
+    /** search employee function */
+    static searchEmployee(queryString) {
+        if (queryString == '' || queryString == null || queryString == undefined) {
+            return postgres.query(
+                `SELECT * FROM employees`
+            );
+        } else {
+            queryString = `%${queryString}%`;
+            return postgres.query(
+                `SELECT * FROM employees
+                 WHERE (LOWER(name) LIKE LOWER($1))
+                 OR phone::TEXT LIKE $1`,
+                [queryString]
+            );
+        }
+    }
+
 }
 
 

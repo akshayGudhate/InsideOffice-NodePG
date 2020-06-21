@@ -302,9 +302,10 @@ const initDatabaseTables = async () => {
 
         return console.log(`Updated DataBase with all necessary tables !!`);
     } catch (err) {
-        console.log(err);
+        console.error(err);
     }
 };
+
 
 
 

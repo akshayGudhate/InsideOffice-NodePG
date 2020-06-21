@@ -114,16 +114,6 @@ router.post('/searchClient', async (req, res) => {
 });
 
 
-/////////////////////////
-//    frequncy list    //
-/////////////////////////
-
-/////////////////////////
-//    services list    //
-/////////////////////////
-
-
-
 
 
 module.exports.router = router;

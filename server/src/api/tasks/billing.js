@@ -38,20 +38,109 @@ router.post('/createBill', async (req, res) => {
             data: []
         });
     }
-})
+});
+
 
 /////////////////////////
-//     state list      //
+//  expected billlist  //
 /////////////////////////
 
-/////////////////////////
-//    frequncy list    //
-/////////////////////////
+router.get('/expectedBills', async (req, res) => {
+    try {
+
+        const expectedBills = (await BillingModel.expectedBills()).rows;
+
+        if (expectedBills.length > 0) {
+            return res.status(200).json({
+                success: true,
+                info: `expected bills till this month!`,
+                data: expectedBills
+            });
+        } else {
+            return res.status(500).json({
+                success: false,
+                info: `oops, expected bills not found !`,
+                data: expectedBills
+            });
+        }
+
+    } catch (err) {
+        return res.status(500).json({
+            success: false,
+            info: `error : ${err.message}`,
+            data: []
+        });
+    }
+});
+
 
 /////////////////////////
-//    services list    //
+//     settle bill     //
 /////////////////////////
 
+router.post('/updateBill', async (req, res) => {
+    try {
+
+        const {bill_id, recieved, discount} = await req.body;
+
+        await BillingModel.updatedBill(bill_id, recieved, discount);
+        const updatedBill = (await BillingModel.getBillByID(bill_id)).rows;
+
+        if (updatedBill.length > 0) {
+            return res.status(200).json({
+                success: true,
+                info: `bill updated !`,
+                data: updatedBill
+            });
+        } else {
+            return res.status(500).json({
+                success: false,
+                info: `oops, bill isn't update !`,
+                data: updatedBill
+            });
+        }
+
+    } catch (err) {
+        return res.status(500).json({
+            success: false,
+            info: `error : ${err.message}`,
+            data: []
+        });
+    }
+});
+
+
+/////////////////////////
+//  complete billlist  //
+/////////////////////////
+
+router.get('/complitedBills', async (req, res) => {
+    try {
+
+        const complitedBills = (await BillingModel.completedBills()).rows;
+
+        if (complitedBills.length > 0) {
+            return res.status(200).json({
+                success: true,
+                info: `completed bills this month!`,
+                data: complitedBills
+            });
+        } else {
+            return res.status(500).json({
+                success: false,
+                info: `oops, completed bills not found !`,
+                data: complitedBills
+            });
+        }
+
+    } catch (err) {
+        return res.status(500).json({
+            success: false,
+            info: `error : ${err.message}`,
+            data: []
+        });
+    }
+});
 
 
 

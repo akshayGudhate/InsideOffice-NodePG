@@ -15,7 +15,43 @@ class TaskModel {
         );
     }
 
+    /** get single task function */
+    static getTaskByID(task_id) {
+        return postgres.query(
+            `SELECT * FROM tasktray WHERE task_id=$1`,
+            [task_id]
+        );
+    }
+
+    /** incomplete tasks function */
+    static incompleteTasks() {
+        return postgres.query(
+            `SELECT * FROM tasktray
+             WHERE is_complete=FALSE`
+        );
+    }
+
+    /** updatedTask this month function */
+    static updateTaskStatus(task_id) {
+        return postgres.query(
+            `UPDATE tasktray
+             SET is_complete=TRUE, time_stamp=now()
+             WHERE task_id=$1`,
+            [task_id]
+        );
+    }
+
+    /** completedTasks this month function */
+    static completedTasks() {
+        return postgres.query(
+            `SELECT * FROM tasktray
+             WHERE EXTRACT(MONTH FROM time_stamp)=EXTRACT(MONTH FROM now())
+             AND is_complete=TRUE`
+        );
+    }
+
 }
+
 
 
 

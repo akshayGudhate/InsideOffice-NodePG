@@ -53,4 +53,5 @@ class StaticDataModel {
 
 
 
+
 module.exports = StaticDataModel;

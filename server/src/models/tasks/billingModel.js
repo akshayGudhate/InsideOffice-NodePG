@@ -15,7 +15,48 @@ class BillingModel {
         );
     }
 
+    /** get single bill function */
+    static getBillByID(bill_id) {
+        return postgres.query(
+            `SELECT * FROM billing WHERE bill_id=$1`,
+            [bill_id]
+        );
+    }
+
+    /** expectedBills this month function */
+    static expectedBills() {
+        return postgres.query(
+            `SELECT * FROM billing
+             WHERE EXTRACT(MONTH FROM expected_payment_date)<=EXTRACT(MONTH FROM now())
+             AND is_settled=FALSE`
+        );
+    }
+
+    /** updatedBill this month function */
+    static updatedBill(bill_id, recieved, discount) {
+        return postgres.query(
+            `UPDATE billing
+             SET recieved=$2, discount=$3, settled_payment_date=now(), is_settled =
+                CASE
+                    WHEN total::NUMERIC=($2::NUMERIC+$3::NUMERIC)
+                    THEN TRUE ELSE FALSE
+                END
+             WHERE bill_id=$1`,
+            [bill_id, recieved, discount]
+        );
+    }
+
+    /** completedBills this month function */
+    static completedBills() {
+        return postgres.query(
+            `SELECT * FROM billing
+             WHERE EXTRACT(MONTH FROM settled_payment_date)=EXTRACT(MONTH FROM now())
+             AND is_settled=TRUE`
+        );
+    }
+
 }
+
 
 
 

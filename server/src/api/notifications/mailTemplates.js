@@ -19,4 +19,6 @@ const mailTemplates = {
 }
 
 
+
+
 module.exports = mailTemplates;

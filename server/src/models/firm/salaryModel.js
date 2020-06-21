@@ -64,4 +64,5 @@ class SalaryModel {
 
 
 
+
 module.exports = SalaryModel;

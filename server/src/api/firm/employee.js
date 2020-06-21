@@ -19,7 +19,7 @@ const router = express.Router();
 
 router.post('/createEmployee', MulterUpload.single('img_url'), async (req, res) => {
     try {
-        const { name, phone, firm_id, hod, role_id, salary, inct_factor } = await req.body;
+        const { name, phone, firm_id, hod, role_id, salary } = await req.body;
         const img_url = (await req.file) ? await req.file.filename : `defaultImage.png`;
 
         const isEmployeeExist = (await EmployeeModel.searchEmployeeByPhone(phone)).rows;
@@ -34,7 +34,7 @@ router.post('/createEmployee', MulterUpload.single('img_url'), async (req, res) 
                 data: isEmployeeExist[0].emp_id
             });
         } else {
-            const emp_id = (await EmployeeModel.createEmployee(name, phone, firm_id, hod, role_id, salary, inct_factor, img_url)).rows[0].emp_id;
+            const emp_id = (await EmployeeModel.createEmployee(name, phone, firm_id, hod, role_id, salary, img_url)).rows[0].emp_id;
 
             if (emp_id > 0) {
                 return res.status(200).json({

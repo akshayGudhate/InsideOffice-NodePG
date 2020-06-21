@@ -131,6 +131,37 @@ router.get('/roleList', async (req, res) => {
 });
 
 /////////////////////////
+//      bank list      //
+/////////////////////////
+
+router.get('/banksList', async (req, res) => {
+    try {
+        const banksList = (await StaticDataModel.getBanksList()).rows;
+
+        if (banksList.length > 0) {
+            return res.status(200).json({
+                success: true,
+                info: `found bank list !`,
+                data: banksList
+            });
+        } else {
+            return res.status(500).json({
+                success: false,
+                info: `oops, not found bank list !`,
+                data: banksList
+            });
+        }
+
+    } catch (err) {
+        return res.status(500).json({
+            success: false,
+            info: `error : ${err.message}`,
+            data: []
+        });
+    }
+});
+
+/////////////////////////
 //    frequncy list    //
 /////////////////////////
 

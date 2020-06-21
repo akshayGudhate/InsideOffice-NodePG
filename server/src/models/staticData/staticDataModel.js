@@ -34,6 +34,13 @@ class StaticDataModel {
         );
     }
 
+    /** banks list function */
+    static getBanksList() {
+        return postgres.query(
+            `SELECT * FROM office_banks ORDER BY bank_id ASC`
+        );
+    }
+
     /** service frequency list function */
     static getServiceFrequencyList() {
         return postgres.query(

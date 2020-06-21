@@ -89,6 +89,33 @@ const initRolesTable = async () => {
 
 
 ////////////////////////
+//    office bank     //
+////////////////////////
+
+const initOfficeBankTable = async () => {
+    const bankDataFile = process.env.CSV_BANKS;
+    await postgres.query(
+        `CREATE TABLE IF NOT EXISTS office_banks(
+            bank_id SERIAL PRIMARY KEY,
+            name TEXT NOT NULL,
+            acc_no NUMERIC NOT NULL,
+            ifsc_code TEXT NOT NULL
+        );`
+    );
+
+    const isBankDataPresent = (await postgres.query(`SELECT COUNT (*) FROM office_banks`)).rows[0].count;
+
+    if (isBankDataPresent == 0) {
+        await postgres.query(
+            `COPY office_banks(bank_id, name, acc_no, ifsc_code)
+             FROM '${bankDataFile}'
+             DELIMITER ',' CSV HEADER;`
+        );
+    }
+};
+
+
+////////////////////////
 //  service frequecy  //
 ////////////////////////
 
@@ -155,13 +182,6 @@ const initFirmsTable = async () => {
             time_stamp TIMESTAMPTZ DEFAULT now() NOT NULL
         );`
     );
-
-    // /** insert my details as a default first row */
-    // return postgres.query(
-    //     `INSERT INTO firms(name, owner, phone, email, city_id)
-    //      VALUES ('InsideAnything', 'Akshay Gudhate', 9561214185, 'akshay.gudhate@yahoo.com', 373)
-    //      ON CONFLICT DO NOTHING;`
-    // );
 };
 
 
@@ -179,7 +199,6 @@ const initEmployeesTable = async () => {
             hod INTEGER REFERENCES employees(emp_id) DEFAULT 1,
             role_id INTEGER REFERENCES roles(role_id),
             salary NUMERIC(15, 2) NOT NULL,
-            inct_factor NUMERIC(2) NOT NULL,
             img_url TEXT,
             is_active BOOLEAN DEFAULT TRUE,
             time_stamp TIMESTAMPTZ DEFAULT now() NOT NULL
@@ -229,6 +248,11 @@ const initBillingTable = async () => {
             total NUMERIC(15, 2) NOT NULL,
             recieved NUMERIC(15, 2) NOT NULL DEFAULT 0,
             discount NUMERIC(15, 2) NOT NULL DEFAULT 0,
+            debited NUMERIC(15, 2) NOT NULL DEFAULT 0,
+            tds_deduction NUMERIC(15, 2) NOT NULL DEFAULT 0,
+            reimb_w_gst NUMERIC(15, 2) NOT NULL DEFAULT 0,
+            reimb_wo_gst NUMERIC(15, 2) NOT NULL DEFAULT 0,
+            bank_id INTEGER REFERENCES office_banks(bank_id),
             expected_payment_date TIMESTAMPTZ,
             settled_payment_date TIMESTAMPTZ,
             is_settled BOOLEAN DEFAULT FALSE,
@@ -249,8 +273,8 @@ const initTasktrayTable = async () => {
             bill_id INTEGER REFERENCES billing(bill_id),
             client_id INTEGER REFERENCES clients(client_id),
             service_id INTEGER REFERENCES service_types(service_id),
-            main_worker INTEGER REFERENCES employees(emp_id),
-            all_workers INTEGER[] NOT NULL,
+            task_reviewer INTEGER REFERENCES employees(emp_id),
+            all_workers TEXT[] NOT NULL,
             is_complete BOOLEAN DEFAULT FALSE,
             time_stamp TIMESTAMPTZ DEFAULT now() NOT NULL 
         );`
@@ -289,6 +313,7 @@ const initDatabaseTables = async () => {
         await initStatesTable();
         await initCitiesTable();
         await initRolesTable();
+        await initOfficeBankTable();
         await initServiceFrequencyTable();
         await initServiceTypesTable();
 

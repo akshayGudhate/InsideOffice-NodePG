@@ -78,6 +78,11 @@ app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
     next();
+})
+
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    next();
 });
 
 
@@ -85,6 +90,10 @@ app.use((req, res, next) => {
 //       routes       //
 ////////////////////////
 
+app.use(express.static(path.join(__dirname, '/dist/io-ui')));
+app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname, '/dist/io-ui/index.html'));
+});
 app.use('/api', apiControllers);
 
 

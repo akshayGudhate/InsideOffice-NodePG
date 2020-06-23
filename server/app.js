@@ -10,7 +10,7 @@ const fs = require('fs');                                                       
 
 const database = require('./src/models/database');                              // initialize database methods
 const apiControllers = require('./src/api/apiControllers');                     // controller - apiRoutes
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 5000;
 
 const app = express();
 

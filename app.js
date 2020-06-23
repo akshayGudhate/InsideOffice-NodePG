@@ -35,7 +35,7 @@ app.use(compression());
 
 /** create a write stream (in append mode) */
 app.use(
-    morgan('combined', {
+    morgan('dev', {
         stream: fs.createWriteStream(
             path.join(__dirname, 'access.log'), { flags: 'a' }
         )

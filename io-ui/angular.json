@@ -1,6 +1,6 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-  "version": 1, 
+  "version": 1,
   "newProjectRoot": "projects",
   "projects": {
     "io-ui": {
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "../server/dist/io-ui",
+            "outputPath": "../dist/io-ui",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "io-ui"
+    }
+  },
+  "defaultProject": "io-ui",
+  "cli": {
+    "analytics": "b0ce4401-9e11-424b-883f-7e6a69f9aa2f"
+  }
 }

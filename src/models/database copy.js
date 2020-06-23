@@ -1,13 +1,12 @@
 require('dotenv').config();
 const { Pool } = require('pg');
-const path = require("path");
 
 const DATABASE_URL = process.env.DATABASE_URL;
 
 ////////////////////////
 //       pg pool      //
 ////////////////////////
-;
+
 const postgres = new Pool({
     connectionString: DATABASE_URL
 });
@@ -18,7 +17,7 @@ const postgres = new Pool({
 ////////////////////////
 
 const initStatesTable = async () => {
-    const statesDataFile = path.resolve('/src/models/staticData/states.csv');
+    const statesDataFile = process.env.CSV_STATES;
     await postgres.query(
         `CREATE TABLE IF NOT EXISTS states(
             state_id SERIAL PRIMARY KEY,
@@ -43,7 +42,7 @@ const initStatesTable = async () => {
 ////////////////////////
 
 const initCitiesTable = async () => {
-    const citiesDataFile = path.resolve('/src/models/staticData/cities.csv');
+    const citiesDataFile = process.env.CSV_CITIES;
     await postgres.query(
         `CREATE TABLE IF NOT EXISTS cities(
             city_id SERIAL PRIMARY KEY,
@@ -69,7 +68,7 @@ const initCitiesTable = async () => {
 ////////////////////////
 
 const initRolesTable = async () => {
-    const rolesDataFile = path.resolve('/src/models/staticData/roles.csv');
+    const rolesDataFile = process.env.CSV_ROLES;
     await postgres.query(
         `CREATE TABLE IF NOT EXISTS roles(
             role_id SERIAL PRIMARY KEY,
@@ -94,7 +93,7 @@ const initRolesTable = async () => {
 ////////////////////////
 
 const initOfficeBankTable = async () => {
-    const bankDataFile = path.resolve('/src/models/staticData/officeBanks.csv');
+    const bankDataFile = process.env.CSV_BANKS;
     await postgres.query(
         `CREATE TABLE IF NOT EXISTS office_banks(
             bank_id SERIAL PRIMARY KEY,
@@ -121,7 +120,7 @@ const initOfficeBankTable = async () => {
 ////////////////////////
 
 const initServiceFrequencyTable = async () => {
-    const serviceFrequencyDataFile = path.resolve('/src/models/staticData/serviceFrequency.csv');
+    const serviceFrequencyDataFile = process.env.CSV_SERVE_FREQ;
     await postgres.query(
         `CREATE TABLE IF NOT EXISTS service_frequency(
             frequency_id SERIAL PRIMARY KEY,
@@ -146,7 +145,7 @@ const initServiceFrequencyTable = async () => {
 ////////////////////////
 
 const initServiceTypesTable = async () => {
-    const serviceTypesDataFile = path.resolve('/src/models/staticData/serviceTypes.csv');
+    const serviceTypesDataFile = process.env.CSV_SERVICE_TYPES;
     await postgres.query(
         `CREATE TABLE IF NOT EXISTS service_types(
             service_id SERIAL PRIMARY KEY,

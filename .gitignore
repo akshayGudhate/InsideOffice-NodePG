@@ -1,9 +1,6 @@
 # ignore node modules
 node_modules/
 
-# ignore dist (build folder)
-dist/
-
 # ignore .env
 .env
 

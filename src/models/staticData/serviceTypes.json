@@ -1,0 +1,67 @@
+[
+ {
+   "service_id": 1,
+   "name": "Income Tax Return",
+   "frequency_id": 1
+ },
+ {
+   "service_id": 2,
+   "name": "Tax Audit",
+   "frequency_id": 1
+ },
+ {
+   "service_id": 3,
+   "name": "Company Audit",
+   "frequency_id": 1
+ },
+ {
+   "service_id": 4,
+   "name": "Trust Audit",
+   "frequency_id": 1
+ },
+ {
+   "service_id": 5,
+   "name": "Form 10B Certification",
+   "frequency_id": 1
+ },
+ {
+   "service_id": 6,
+   "name": "GST 9/9C",
+   "frequency_id": 1
+ },
+ {
+   "service_id": 7,
+   "name": "TDS Returns",
+   "frequency_id": 2
+ },
+ {
+   "service_id": 8,
+   "name": "GST Return",
+   "frequency_id": 2
+ },
+ {
+   "service_id": 9,
+   "name": "GST Return",
+   "frequency_id": 3
+ },
+ {
+   "service_id": 10,
+   "name": "Income Tax Litigation and Registration",
+   "frequency_id": 4
+ },
+ {
+   "service_id": 11,
+   "name": "Consultation",
+   "frequency_id": 5
+ },
+ {
+   "service_id": 12,
+   "name": "Review Charges",
+   "frequency_id": 5
+ },
+ {
+   "service_id": 13,
+   "name": "Other Services",
+   "frequency_id": 5
+ }
+]

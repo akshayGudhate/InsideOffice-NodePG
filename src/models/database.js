@@ -17,7 +17,6 @@ const postgres = new Pool({
 ////////////////////////
 
 const initStatesTable = async () => {
-    const statesDataFile = process.env.CSV_STATES;
     await postgres.query(
         `CREATE TABLE IF NOT EXISTS states(
             state_id SERIAL PRIMARY KEY,
@@ -28,11 +27,14 @@ const initStatesTable = async () => {
     const isStateDataPresent = (await postgres.query(`SELECT COUNT (*) FROM states`)).rows[0].count;
 
     if (isStateDataPresent == 0) {
-        await postgres.query(
-            `COPY states(state_id, name)
-             FROM '${statesDataFile}'
-             DELIMITER ',' CSV HEADER;`
-        );
+        const statesData = require('./staticData/states.json');
+        statesData.map(async (item) => {
+            await postgres.query(
+                `INSERT INTO states(state_id, name)
+                 VALUES($1, $2)`,
+                [item.state_id, item.name]
+            )
+        });
     }
 };
 
@@ -42,7 +44,6 @@ const initStatesTable = async () => {
 ////////////////////////
 
 const initCitiesTable = async () => {
-    const citiesDataFile = process.env.CSV_CITIES;
     await postgres.query(
         `CREATE TABLE IF NOT EXISTS cities(
             city_id SERIAL PRIMARY KEY,
@@ -54,11 +55,14 @@ const initCitiesTable = async () => {
     const isCityDataPresent = (await postgres.query(`SELECT COUNT (*) FROM cities`)).rows[0].count;
 
     if (isCityDataPresent == 0) {
-        await postgres.query(
-            `COPY cities(city_id, name, state_id)
-             FROM '${citiesDataFile}'
-             DELIMITER ',' CSV HEADER;`
-        );
+        const citiesData = require('./staticData/cities.json');
+        citiesData.map(async (item) => {
+            await postgres.query(
+                `INSERT INTO cities(city_id, name, state_id)
+                 VALUES($1, $2, $3)`,
+                [item.city_id, item.name, item.state_id]
+            )
+        });
     }
 };
 
@@ -68,7 +72,6 @@ const initCitiesTable = async () => {
 ////////////////////////
 
 const initRolesTable = async () => {
-    const rolesDataFile = process.env.CSV_ROLES;
     await postgres.query(
         `CREATE TABLE IF NOT EXISTS roles(
             role_id SERIAL PRIMARY KEY,
@@ -79,11 +82,14 @@ const initRolesTable = async () => {
     const isRoleDataPresent = (await postgres.query(`SELECT COUNT (*) FROM roles`)).rows[0].count;
 
     if (isRoleDataPresent == 0) {
-        await postgres.query(
-            `COPY roles(role_id, name)
-             FROM '${rolesDataFile}'
-             DELIMITER ',' CSV HEADER;`
-        );
+        const rolesData = require('./staticData/roles.json');
+        rolesData.map(async (item) => {
+            await postgres.query(
+                `INSERT INTO roles(role_id, name)
+                 VALUES($1, $2)`,
+                [item.role_id, item.name]
+            )
+        });
     }
 };
 
@@ -93,7 +99,6 @@ const initRolesTable = async () => {
 ////////////////////////
 
 const initOfficeBankTable = async () => {
-    const bankDataFile = process.env.CSV_BANKS;
     await postgres.query(
         `CREATE TABLE IF NOT EXISTS office_banks(
             bank_id SERIAL PRIMARY KEY,
@@ -106,11 +111,14 @@ const initOfficeBankTable = async () => {
     const isBankDataPresent = (await postgres.query(`SELECT COUNT (*) FROM office_banks`)).rows[0].count;
 
     if (isBankDataPresent == 0) {
-        await postgres.query(
-            `COPY office_banks(bank_id, name, acc_no, ifsc_code)
-             FROM '${bankDataFile}'
-             DELIMITER ',' CSV HEADER;`
-        );
+        const banksData = require('./staticData/officeBanks.json');
+        banksData.map(async (item) => {
+            await postgres.query(
+                `INSERT INTO office_banks(bank_id, name, acc_no, ifsc_code)
+                 VALUES($1, $2, $3, $4)`,
+                [item.bank_id, item.name, item.acc_no, item.ifsc_code]
+            )
+        });
     }
 };
 
@@ -131,11 +139,14 @@ const initServiceFrequencyTable = async () => {
     const isServiceFrequencyDataPresent = (await postgres.query(`SELECT COUNT (*) FROM service_frequency`)).rows[0].count;
 
     if (isServiceFrequencyDataPresent == 0) {
-        await postgres.query(
-            `COPY service_frequency(frequency_id, name)
-             FROM '${serviceFrequencyDataFile}'
-             DELIMITER ',' CSV HEADER;`
-        );
+        const frenquencyData = require('./staticData/serviceFrequency.json');
+        frenquencyData.map(async (item) => {
+            await postgres.query(
+                `INSERT INTO service_frequency(frequency_id, name)
+                 VALUES($1, $2)`,
+                [item.frequency_id, item.name]
+            )
+        });
     }
 };
 
@@ -157,11 +168,14 @@ const initServiceTypesTable = async () => {
     const isServiceTypeDataPresent = (await postgres.query(`SELECT COUNT (*) FROM service_types`)).rows[0].count;
 
     if (isServiceTypeDataPresent == 0) {
-        await postgres.query(
-            `COPY service_types(service_id, name, frequency_id)
-             FROM '${serviceTypesDataFile}'
-             DELIMITER ',' CSV HEADER;`
-        );
+        const serviceData = require('./staticData/serviceTypes.json');
+        serviceData.map(async (item) => {
+            await postgres.query(
+                `INSERT INTO service_types(service_id, name, frequency_id)
+                 VALUES($1, $2, $3)`,
+                [item.service_id, item.name, item.frequency_id]
+            )
+        });
     }
 };
 

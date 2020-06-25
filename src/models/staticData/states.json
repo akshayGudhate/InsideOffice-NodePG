@@ -1,0 +1,146 @@
+[
+ {
+   "state_id": 1,
+   "name": "Andhra Pradesh (AP)"
+ },
+ {
+   "state_id": 2,
+   "name": "Arunachal Pradesh (ANP)"
+ },
+ {
+   "state_id": 3,
+   "name": "Assam (AS)"
+ },
+ {
+   "state_id": 4,
+   "name": "Bihar (BR)"
+ },
+ {
+   "state_id": 5,
+   "name": "Chhattisgarh (CG)"
+ },
+ {
+   "state_id": 6,
+   "name": "Goa (GA)"
+ },
+ {
+   "state_id": 7,
+   "name": "Gujarat (GJ)"
+ },
+ {
+   "state_id": 8,
+   "name": "Haryana (HR)"
+ },
+ {
+   "state_id": 9,
+   "name": "Himachal Pradesh (HP)"
+ },
+ {
+   "state_id": 10,
+   "name": "Jammu and Kashmir (JK)"
+ },
+ {
+   "state_id": 11,
+   "name": "Jharkhand (JH)"
+ },
+ {
+   "state_id": 12,
+   "name": "Karnataka (KA)"
+ },
+ {
+   "state_id": 13,
+   "name": "Kerala (KL)"
+ },
+ {
+   "state_id": 14,
+   "name": "Madhya Pradesh (MP)"
+ },
+ {
+   "state_id": 15,
+   "name": "Maharashtra (MH)"
+ },
+ {
+   "state_id": 16,
+   "name": "Manipur (MN)"
+ },
+ {
+   "state_id": 17,
+   "name": "Meghalaya (ML)"
+ },
+ {
+   "state_id": 18,
+   "name": "Mizoram (MZ)"
+ },
+ {
+   "state_id": 19,
+   "name": "Nagaland (NL)"
+ },
+ {
+   "state_id": 20,
+   "name": "Odisha (OD)"
+ },
+ {
+   "state_id": 21,
+   "name": "Punjab (PB)"
+ },
+ {
+   "state_id": 22,
+   "name": "Rajasthan (RJ)"
+ },
+ {
+   "state_id": 23,
+   "name": "Sikkim (SK)"
+ },
+ {
+   "state_id": 24,
+   "name": "Tamil Nadu (TN)"
+ },
+ {
+   "state_id": 25,
+   "name": "Telangana (TS)"
+ },
+ {
+   "state_id": 26,
+   "name": "Tripura (TR)"
+ },
+ {
+   "state_id": 27,
+   "name": "Uttar Pradesh (UP)"
+ },
+ {
+   "state_id": 28,
+   "name": "Uttarakhand (UK)"
+ },
+ {
+   "state_id": 29,
+   "name": "West Bengal (WB)"
+ },
+ {
+   "state_id": 30,
+   "name": "Andaman and Nicobar (A&N)"
+ },
+ {
+   "state_id": 31,
+   "name": "Chandigarh (CHD)"
+ },
+ {
+   "state_id": 32,
+   "name": "Dadra and Nagar Haveli (DNH)"
+ },
+ {
+   "state_id": 33,
+   "name": "Daman and Diu (DD)"
+ },
+ {
+   "state_id": 34,
+   "name": "Lakshadweep (LD)"
+ },
+ {
+   "state_id": 35,
+   "name": "Delhi (DL)"
+ },
+ {
+   "state_id": 36,
+   "name": "Puducherry (PY)"
+ }
+]

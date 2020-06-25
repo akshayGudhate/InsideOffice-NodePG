@@ -1,0 +1,22 @@
+[
+ {
+   "frequency_id": 1,
+   "name": "Annually"
+ },
+ {
+   "frequency_id": 2,
+   "name": "Quarterly"
+ },
+ {
+   "frequency_id": 3,
+   "name": "Monthly"
+ },
+ {
+   "frequency_id": 4,
+   "name": "One Time"
+ },
+ {
+   "frequency_id": 5,
+   "name": "As Needed"
+ }
+]

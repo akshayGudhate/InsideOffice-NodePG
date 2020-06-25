@@ -1,0 +1,14 @@
+[
+ {
+   "bank_id": 1,
+   "name": "HDFC",
+   "acc_no": 112233445566,
+   "ifsc_code": "HDFC0000825"
+ },
+ {
+   "bank_id": 2,
+   "name": "Bank of Maharashtra",
+   "acc_no": 11223344599,
+   "ifsc_code": "HDFC00008211"
+ }
+]

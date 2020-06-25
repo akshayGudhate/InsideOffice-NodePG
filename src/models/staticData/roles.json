@@ -1,0 +1,26 @@
+[
+ {
+   "role_id": 1,
+   "name": "Owner"
+ },
+ {
+   "role_id": 2,
+   "name": "Chartered Accountant"
+ },
+ {
+   "role_id": 3,
+   "name": "Senior Reviewer"
+ },
+ {
+   "role_id": 4,
+   "name": "Junior Reviewer"
+ },
+ {
+   "role_id": 5,
+   "name": "Accounts"
+ },
+ {
+   "role_id": 6,
+   "name": "Other"
+ }
+]

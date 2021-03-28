@@ -476,63 +476,6 @@
         2. getSingleState : returns single state as per id
 
 
-
-###### * __root ->> src ->> public :__
->  All the publically accessable folders are here like: images, scripts, css and views.
-
-
--  __root ->> src ->> public ->> css :__
-    >  Files for styling the web-app.
-
-    * __style.css :__
-        - contains neccessary styling for the views and basic css.
-
-
--  __root ->> src ->> public ->> images :__
-    >  Images regarding web-app.
-
-    * all the default images needed for the application and the team members images stored here.
-
-
--  __root ->> src ->> public ->> scripts :__
-    >  Files for the web-app scripting and extra added info like flash messages.
-
-    * __flashMessageScript :__
-        - script to display flash message only for 1sec. Colour red if error or green if success.
-    * __lineChartScript :__
-        - NOT IN USE - script to display line chart.
-    * __showMoreScript :__
-        - NOT IN USE - script to display more content of an para and again reduce it to single line.
-
-
--  __root ->> src ->> public ->> views :__
-    >  Files for the web user i.e. Admin, and web-app views are handled here.
-
-    * __aboutUs.ejs :__
-        - view for information about the company and the team.
-    * __addHelpLink.ejs :__
-        - view for adding help links for the internal employees role wise.
-    * __dashboard.ejs :__
-        - NOT IN USE - dashboard for the employee.
-    * __index.ejs :__
-        - index view basic info of the employee and the  navigations.
-    * __linkRedirect.ejs :__
-        - view to redirect the original links from the NPAV links.
-    * __login.ejs :__
-        - view for getting OTP while login.
-    * __monthlyDashboard.ejs :__
-        - NOT IN USE - monthly dashboard for the admin.
-    * __otp.ejs :__
-        - viwe for placing OTP while login.
-    * __pendingScoreList.ejs :__
-        - view for the pending score list and can be approved/disapprove by admin.
-    * __privacyPolicy.ejs :__
-        - view for privacy and policy of the application.
-    * __registerAdmin.ejs :__
-        - view for adding new admin.
-
-
-
 ###### * __root ->> src ->> uploads :__
 >  All the files and images uploded by the end user will be stored here on the server like profile images.
 
@@ -540,5 +483,5 @@
 
 
 ## **Thanks for reading, have a great day ahead.... !**
-# **--------------------: SalesScoreBoard Backend :--------------------** 
+# **--------------------: InsideOffice Backend :--------------------** 
 > --------------------------------------------------------------------------------------------- Coded and Documented:  __*-- Akshay S. Gudhate.*__

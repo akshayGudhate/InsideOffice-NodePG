@@ -17,7 +17,7 @@
     "dependencies": {
         "body-parser": "^1.19.0",
         "compression": "^1.7.4",
-        "express": "^4.17.1",
+        "express": "^4.17.3",
         "fs-extra": "^9.0.1",
         "helmet": "^3.23.1",
         "morgan": "^1.10.0",
